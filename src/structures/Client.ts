@@ -1,4 +1,3 @@
-
 const get = require('node-superfetch');
 const searchAnime = `
 query ($search: String, $type: MediaType, $isAdult: Boolean) {
@@ -75,7 +74,7 @@ class Client {
             query: searchAnime,
         });
         if(!body.data.anime.results.length) {
-            throw new Error('Anime Not Found')
+            throw new Error('Anime not found, Maybe you make a typos?')
         }
         return body.data.anime.results[0].id;
     }

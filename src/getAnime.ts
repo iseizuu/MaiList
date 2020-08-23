@@ -5,15 +5,16 @@ class Anime {
     public constructor() {
     }
     /**
-     * Anime Endpoint
+     * @returns {Promise<string>} Anime Endpoint
      */
-    public async anime(query: string) {
-        const id = await getAnime.srcAnime(query);
-        if(!id) {
-            return Error('Anime Not Found')
-        }
-        const result = getAnime.fetchAnime(id);
-        return result;
+    public anime(query: string) {
+        return new Promise((resolve, reject) => {
+            const id = getAnime.srcAnime(query)
+            .then(res => {
+                resolve(getAnime.fetchAnime(res));
+            })
+            .catch(reject)
+        });
     };
 };
 export { Anime };
