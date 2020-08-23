@@ -1,0 +1,25 @@
+{
+  "name": "mailist",
+  "version": "0.0.4",
+  "main": "lib/index.js",
+  "files": [
+    "lib/**/*"
+  ],
+  "scripts": {
+    "test": "node lib/index.js",
+    "build": "tsc",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "repository": "https://github.com/VeguiIzumi/MaiList.git",
+  "author": "VeguiIzumi",
+  "license": "MIT",
+  "dependencies": {
+    "node-superfetch": "^0.1.10"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.7",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.0.2"
+  }
+}
