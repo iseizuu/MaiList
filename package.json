@@ -1,6 +1,6 @@
 {
   "name": "mailist",
-  "version": "0.0.16",
+  "version": "0.0.18",
   "description": "An Unofficial Anilist Wrapper For Node.js",
   "main": "lib/index.js",
   "files": [

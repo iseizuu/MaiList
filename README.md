@@ -15,7 +15,7 @@ yarn add mailist
 ```js
 const { Anime } = require("mailist");
 const getAnime = new Anime();
-getAnime.then(res => {
+getAnime.anime('Kimi No Nawa').then(res => {
     // do it your self
     console.log(res)
 });
