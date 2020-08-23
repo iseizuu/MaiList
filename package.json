@@ -1,6 +1,6 @@
 {
   "name": "mailist",
-  "version": "0.0.18",
+  "version": "1.0.1",
   "description": "An Unofficial Anilist Wrapper For Node.js",
   "main": "lib/index.js",
   "files": [
@@ -11,6 +11,7 @@
     "build": "tsc",
     "lint": "tslint -p tsconfig.json"
   },
+  "repository": "https://github.com/VeguiIzumi/MaiList.git",
   "keywords": [
     "anilist",
     "anime",
@@ -18,7 +19,6 @@
     "anilist-wrapper",
     "anilist-api"
   ],
-  "repository": "https://github.com/VeguiIzumi/MaiList.git",
   "author": "VeguiIzumi",
   "license": "MIT",
   "dependencies": {
