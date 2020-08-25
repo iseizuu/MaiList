@@ -22,6 +22,7 @@
   "author": "VeguiIzumi",
   "license": "MIT",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "node-superfetch": "^0.1.10"
   },
   "devDependencies": {

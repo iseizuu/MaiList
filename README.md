@@ -1,15 +1,17 @@
-# MaiList (Unrelease)
-An Unofficial Anilist API
+# MaiList (Beta)
+An Unofficial Anilist API Wrapper
 
 ## Installing
 [![Version](https://nodei.co/npm/mailist.png?compact=true)](https://nodei.co/npm/mailist)
 ```sh
 # npm
+
 npm i mailist
 yarn add mailist
 ```
 
 ## Example Usage
+
 #### .anime(string)
 * string = Anime title
 ```js

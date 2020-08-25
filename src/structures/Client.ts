@@ -1,3 +1,4 @@
+const cheer = require('cheerio');
 const get = require('node-superfetch');
 const searchAnime = `
 query ($search: String, $type: MediaType, $isAdult: Boolean) {
@@ -49,6 +50,21 @@ class Client {
     {
         this.baseURL = opt.uri;
     };
+
+    /**
+     * fetchMal
+     */
+    public async fetchMal(id : string) {
+        try {
+            const { text } = await get.get(`https://myanimelist.net/anime/${id}`);
+            const mal = cheer.load(text);
+            return mal('span[itemprop="ratingValue"]').first().text();
+        }
+        catch {
+            return null;
+        }
+        
+    }
 
     async fetchAnime(id: string) {
         try {

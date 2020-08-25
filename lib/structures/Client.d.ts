@@ -4,6 +4,10 @@ interface ClientOpt {
 declare class Client {
     private baseURL;
     constructor(opt?: ClientOpt);
+    /**
+     * fetchMal
+     */
+    fetchMal(id: string): Promise<any>;
     fetchAnime(id: string): Promise<any>;
     srcAnime(param: string): Promise<any>;
 }
