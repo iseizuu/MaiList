@@ -24,23 +24,23 @@ getAnime.anime('Kimi No Nawa').then(res => {
 });
 ```
 #### Manga
-* .manga
+* .manga(string)
 * string = Manga title
 ```js
-const { Anime } = require("mailist");
-const getAnime = new Manga();
-getAnime.anime('My Hero Academia').then(res => {
+const { Manga } = require("mailist");
+const getManga = new Manga();
+getManga.manga('My Hero Academia').then(res => {
     // do it your self
     console.log(res)
 });
 ```
 #### Character
-* .chracter
+* .character(string)
 * string = Character Name
 ```js
 const { Character } = require("mailist");
-const getAnime = new Character();
-getAnime.anime('Mai Sakurajima').then(res => {
+const getChar = new Character();
+getChar.character('Mai Sakurajima').then(res => {
     // do it your self
     console.log(res)
 });

@@ -1,42 +1,42 @@
 import { Client } from './structures/Client';
 const fetch = new Client()
 const searchManga = `
-	query ($search: String, $type: MediaType, $isAdult: Boolean) {
-		anime: Page (perPage: 10) {
-			results: media (type: $type, isAdult: $isAdult, search: $search) {
-				id
-				title {
-					english
-					romaji
-				}
-			}
-		}
-	}
-`;
-const resultManga = `
-	query media($id: Int, $type: MediaType) {
-		Media(id: $id, type: $type) {
+query ($search: String, $type: MediaType, $isAdult: Boolean) {
+	anime: Page (perPage: 10) {
+		results: media (type: $type, isAdult: $isAdult, search: $search) {
 			id
-			idMal
 			title {
 				english
 				romaji
 			}
-			coverImage {
-				large
-				medium
-			}
-			startDate { year }
-			description(asHtml: false)
-			siteUrl
-			type
-			status
-			volumes
-			chapters
-			isAdult
-			meanScore
 		}
 	}
+}
+`;
+const resultManga = `
+query media($id: Int, $type: MediaType) {
+	Media(id: $id, type: $type) {
+		id
+		idMal
+		title {
+			english
+			romaji
+		}
+		coverImage {
+			large
+			medium
+		}
+		startDate { year }
+		description(asHtml: false)
+		siteUrl
+		type
+		status
+		volumes
+		chapters
+		isAdult
+		meanScore
+	}
+}
 `;
 
 class Manga {

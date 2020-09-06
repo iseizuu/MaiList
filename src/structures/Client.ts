@@ -61,17 +61,17 @@ class Client {
     }
 
     async searchChar(param: string, graphql: string) {
-		const { body } = await get.post(this.baseURL).send({
-				variables: { search: param },
-				query: graphql,
-			});
-		if (!body.data.characters.results.length) {
+        const { body } = await get.post(this.baseURL).send({
+            variables: { search: param },
+            query: graphql,
+        });
+        if (!body.data.characters.results.length) {
             throw new Error('Cant find that character')
         }
-		return body.data.characters.results[0].id;
-	}
-
-	async fetchChar(id: string, graphql: string) {
+        return body.data.characters.results[0].id;
+    }
+    
+    async fetchChar(id: string, graphql: string) {
         const { body } = await get.post(this.baseURL).send({
             variables: { id },
             query: graphql,
