@@ -1,43 +1,7 @@
 const cheer = require('cheerio');
 const get = require('node-superfetch');
-const searchAnime = `
-query ($search: String, $type: MediaType, $isAdult: Boolean) {
-    anime: Page (perPage: 10) {
-        results: media (type: $type, isAdult: $isAdult, search: $search) {
-            id
-            title {
-                english
-                romaji
-            }
-        }
-    }
-}
-`;
-const fetchAnime = `
-query media($id: Int, $type: MediaType) {
-    Media(id: $id, type: $type) {
-        id
-        idMal
-        title {
-            english
-            romaji
-        }
-        coverImage {
-            large
-            medium
-        }
-        startDate { year }
-        description(asHtml: false)
-        season
-        type
-        siteUrl
-        status
-        episodes
-        isAdult
-        meanScore
-    }
-}
-`;
+const { author, version } = require('../../package.json')
+
 interface ClientOpt  {
     uri: string
 };
@@ -66,14 +30,14 @@ class Client {
         
     }
 
-    async fetchAnime(id: string) {
+    async fetch(id: string, type: string, graphql: string) {
         try {
             const { body } = await get.post(this.baseURL).send({
                 variables: {
                     id,
-                    type: 'ANIME'
+                    type: type
                 },
-                query: fetchAnime,
+                query: graphql,
             });
             return body.data.Media;
         }
@@ -81,18 +45,38 @@ class Client {
             throw new Error(`Anime With ID : ${id} Is Not Found`)
         }
     };
-    async srcAnime(param: string) {
+
+    async search(param: string, type: string, graphql: string) {
         const { body } = await get.post(this.baseURL).send({
             variables: {
                 search: param,
-                type: 'ANIME'
+                type: type
             },
-            query: searchAnime,
+            query: graphql,
         });
         if(!body.data.anime.results.length) {
             throw new Error('Anime not found, Maybe you make a typos?')
         }
         return body.data.anime.results[0].id;
     }
+
+    async searchChar(param: string, graphql: string) {
+		const { body } = await get.post(this.baseURL).send({
+				variables: { search: param },
+				query: graphql,
+			});
+		if (!body.data.characters.results.length) {
+            throw new Error('Cant find that character')
+        }
+		return body.data.characters.results[0].id;
+	}
+
+	async fetchChar(id: string, graphql: string) {
+        const { body } = await get.post(this.baseURL).send({
+            variables: { id },
+            query: graphql,
+        });
+        return body.data.Character;
+    }
 };
-export { Client };
+export { Client, author, version };

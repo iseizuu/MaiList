@@ -5,7 +5,7 @@ declare class Anime {
      */
     anime(query: string): Promise<unknown>;
     /**
-     * Getting The Mal Score
+     * Getting The Mal Score || Maybe Usefull
      */
     malScore(query: string): Promise<unknown>;
 }

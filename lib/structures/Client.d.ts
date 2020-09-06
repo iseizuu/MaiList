@@ -1,3 +1,4 @@
+declare const author: any, version: any;
 interface ClientOpt {
     uri: string;
 }
@@ -8,7 +9,9 @@ declare class Client {
      * fetchMal
      */
     fetchMal(id: string): Promise<any>;
-    fetchAnime(id: string): Promise<any>;
-    srcAnime(param: string): Promise<any>;
+    fetch(id: string, type: string, graphql: string): Promise<any>;
+    search(param: string, type: string, graphql: string): Promise<any>;
+    searchChar(param: string, graphql: string): Promise<any>;
+    fetchChar(id: string, graphql: string): Promise<any>;
 }
-export { Client };
+export { Client, author, version };
