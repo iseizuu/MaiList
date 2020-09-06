@@ -1,41 +1,42 @@
 import { Client } from './structures/Client';
 const client = new Client()
 const req = require('node-superfetch');
+
 const q = `
-	query ($search: String) {
-		characters: Page (perPage: 1) {
-			results: characters (search: $search) { id }
-		}
-	}
+query ($search: String) {
+    characters: Page (perPage: 1) {
+	     results: characters (search: $search) { id }
+    }
+}
 `;
 const s = `
-	query ($id: Int!) {
-		Character (id: $id) {
-			id
-			name {
-				first
-				last
-			}
-			image {
-				large
-				medium
-			}
-			description(asHtml: false)
-			siteUrl
-			media(page: 1, perPage: 5) {
-				edges {
-					node {
-						title {
-							english
-							userPreferred
-						}
-						type
-						siteUrl
+query ($id: Int!) {
+	Character (id: $id) {
+		id
+		name {
+			first
+			last
+		}
+		image {
+			large
+			medium
+		}
+		description(asHtml: false)
+		siteUrl
+		media(page: 1, perPage: 5) {
+			edges {
+				node {
+					title {
+						english
+						userPreferred
 					}
+					type
+					siteUrl
 				}
 			}
 		}
 	}
+}
 `;
 class Character {
     public constructor() {
