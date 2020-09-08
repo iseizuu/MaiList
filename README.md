@@ -55,5 +55,4 @@ getChar.character('Mai Sakurajima').then(res => {
     const mal = await resultAnime.malScore(resultAnime.id) // added mal score
     console.log(resultAnime, mal);
 })()
-});
 ```
