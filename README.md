@@ -1,58 +1,85 @@
-# MaiList (Beta)
-An Unofficial Anilist API Wrapper
+# MaiList
+An Unofficial [Anilist](https://anilist.co/) API Wrapper And Strongly Typed
+
+- [Documentation](soon) _not yet_
 
 ## Installing
 [![Version](https://nodei.co/npm/mailist.png?compact=true)](https://nodei.co/npm/mailist)
 ```sh
-# npm
+#npm
+npm install mailist
 
-npm i mailist
+#yarn
 yarn add mailist
 ```
 
 ## Example Usage
 
-#### Anime
-* .anime(string)
-* string = Anime title
+### Anime
+###### Methods
+- **anime**(query: string)
+- **Mal**(id: string)
+- **voiceActors**(query: string)
+
+
 ```js
 const { Anime } = require("mailist");
-const getAnime = new Anime();
-getAnime.anime('Kimi No Nawa').then(res => {
-    // do it your self
-    console.log(res)
-});
+const get = new Anime();
+
+function getAnime() {
+    get.anime("Majo No Tabi-Tabi")
+        .then(res => {
+            console.log(res)
+        });
+}
+getAnime()
 ```
-#### Manga
-* .manga(string)
-* string = Manga title
+- **Getting voice actors from anime title**
+```js
+function voiceActors() {
+    get.voiceActors("Aho Girl")
+        .then(res => {
+            console.log(res)
+        });
+}
+voiceActors()
+```
+
+### Manga
+###### Methods
+- **manga**(query: string)
+- **Mal**(id: string)
+
 ```js
 const { Manga } = require("mailist");
-const getManga = new Manga();
-getManga.manga('My Hero Academia').then(res => {
-    // do it your self
-    console.log(res)
-});
+const get = new Manga();
+
+function getManga() {
+    get.manga("Quintessential Quintuplets")
+        .then(res => {
+            console.log(res)
+        })
+}
+getManga()
 ```
-#### Character
-* .character(string)
-* string = Character Name
+### Character
+###### Methods
+- **character**(query: string)
+
 ```js
 const { Character } = require("mailist");
-const getChar = new Character();
-getChar.character('Mai Sakurajima').then(res => {
-    // do it your self
-    console.log(res)
-});
+const get = new Character();
+
+function getChar() {
+    get.character("Elaina")
+        .then(res => {
+            console.log(res)
+        })
+}
+getChar()
 ```
-# Additional
-#### Fetch the anime Mal Score
-```js
-(async () => {
-    const { Anime } = require("mailist");
-    const getAnime = new Anime();
-    const resultAnime = await getAnime.anime('Bunny Girl');
-    const mal = await resultAnime.malScore(resultAnime.id) // added mal score
-    console.log(resultAnime, mal);
-})()
-```
+
+## Nb
+Actually i don't know how to write the docs, but i hope you understand, and if you have any questions, you can join my [Discord Server](https://discord.gg/YmJEcFR)
+
+© [Aizuu](https://github.com/iseizuu)

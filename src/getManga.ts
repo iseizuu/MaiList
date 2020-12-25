@@ -1,71 +1,23 @@
-import { Client } from './structures/Client';
-const fetch = new Client()
-const searchManga = `
-query ($search: String, $type: MediaType, $isAdult: Boolean) {
-	anime: Page (perPage: 10) {
-		results: media (type: $type, isAdult: $isAdult, search: $search) {
-			id
-			title {
-				english
-				romaji
-			}
-		}
-	}
-}
-`;
-const resultManga = `
-query media($id: Int, $type: MediaType) {
-	Media(id: $id, type: $type) {
-		id
-		idMal
-		title {
-			english
-			romaji
-		}
-		coverImage {
-			large
-			medium
-		}
-		startDate { year }
-		description(asHtml: false)
-		siteUrl
-		type
-		status
-		volumes
-		chapters
-		isAdult
-		meanScore
-	}
-}
-`;
+import Client  from "./structures/Client";
+import { MangaStruc } from "./typings";
 
-class Manga {
-    public constructor() {
-    }
-    /**
-     * @returns {Promise<string>} Manga Endpoint
-     */
-    public manga(query: string) {
+export default class Manga {
+    private client = new Client();
+    public manga(query: string): Promise<MangaStruc> {
         return new Promise((resolve, reject) => {
-            const id = fetch.search(query, 'MANGA', searchManga)
-            .then(res => {
-                resolve(fetch.fetch(res, 'MANGA', resultManga));
-            })
-            .catch(reject)
-        });
-    };
+            this.client.getManga(query, this.client.config.mangaGraphql)
+                .then(result => {
+                    if (!result.data.anime.results.length) {
+                        throw new TypeError(`Oh No, Manga with title ${query} is Not Found`)
+                    }
+                    resolve(result)
+                })
+                .catch(reject)
+        })
+    }
 
-    /**
-     * Getting The Mal Score || Maybe Usefull
-     */
-    public malScore(query : string,) {
-        return new Promise((resolve, reject) => {
-            const id = fetch.search(query, 'MANGA', searchManga)
-            .then(res => {
-                resolve(fetch.fetchMal(res));
-            })
-            .catch(reject)
-        });
+    public Mal(id: string): Promise<string> {
+        return this.client.fetchMal(id)
+            .then(mal => mal)
     }
-};
-export { Manga };
+}

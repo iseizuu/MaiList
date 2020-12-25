@@ -1,58 +1,18 @@
-import { Client } from './structures/Client';
-const client = new Client()
-const req = require('node-superfetch');
+import Client  from "./structures/Client";
+import { CharStruc } from "./typings";
 
-const q = `
-query ($search: String) {
-    characters: Page (perPage: 1) {
-	     results: characters (search: $search) { id }
+export default class Character {
+    private client = new Client();
+    public character(query: string): Promise<CharStruc> {
+        return new Promise((resolve, reject) => {
+            this.client.getChar(query, this.client.config.charGraphql)
+                .then(result => {
+                    if (!result.data.characters.results.length) {
+                        throw new TypeError(`Oh No, Character ${query} is Not Found`)
+                    }
+                    resolve(result)
+                })
+                .catch(reject)
+        })
     }
 }
-`;
-const s = `
-query ($id: Int!) {
-	Character (id: $id) {
-		id
-		name {
-			first
-			last
-		}
-		image {
-			large
-			medium
-		}
-		description(asHtml: false)
-		siteUrl
-		media(page: 1, perPage: 5) {
-			edges {
-				node {
-					title {
-						english
-						userPreferred
-					}
-					type
-					siteUrl
-				}
-			}
-		}
-	}
-}
-`;
-class Character {
-    public constructor() {
-    }
-    /**
-     * @returns {Promise<string>} Search Character
-     */
-    public character(query: string) {
-        return new Promise(async (resolve, reject) => {
-            const id = client.searchChar(query, q)
-            .then(async res => {
-                resolve(client.fetchChar(res, s));
-            })
-            .catch(reject)
-        });
-    };
-};
-
-export { Character };
