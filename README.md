@@ -2,6 +2,7 @@
 An Unofficial [Anilist](https://anilist.co/) API Wrapper And Strongly Typed
 
 - [Documentation](soon) _not yet_
+- [Discord.js Example](https://github.com/iseizuu/Myfirst-discord-bot/blob/glitch/commands/anime/anime.js)
 
 ## Installing
 [![Version](https://nodei.co/npm/mailist.png?compact=true)](https://nodei.co/npm/mailist)
